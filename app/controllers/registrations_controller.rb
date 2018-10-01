@@ -13,9 +13,10 @@ class RegistrationsController < Milia::RegistrationsController
       # have a working copy of the params in case Tenant callbacks
       # make any changes
     tenant_params = sign_up_params_tenant
-    user_params   = sign_up_params_user
+    user_params   = sign_up_params_user.merge({ is_admin: true })
     coupon_params = sign_up_params_coupon
-     sign_out_session!
+
+    sign_out_session!
        # next two lines prep signup view parameters
     prep_signup_view( tenant_params, user_params, coupon_params )
         # validate recaptcha first unless not enabled
